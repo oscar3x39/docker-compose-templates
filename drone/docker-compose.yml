@@ -1,0 +1,40 @@
+version: '3.5'
+
+services:
+  drone-server:
+    networks:
+      - drone
+    image: drone/drone:latest
+    ports:
+      - 9090:80
+      - 9091:9000
+    env_file:
+      - ./.env
+    volumes:
+      - ./data:/var/lib/drone
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_SERVER_HOST=${DRONE_SERVER_HOST}
+      - DRONE_OPEN=true
+      - DRONE_TLS_AUTOCERT=false
+      - DRONE_GITHUB=true
+      - DRONE_SERVER_PROTO=http
+      - DRONE_GITHUB_CLIENT=${DRONE_GITHUB_CLIENT_ID}
+      - DRONE_GITHUB_SECRET=${DRONE_GITHUB_CLIENT_SECRET}
+      - DRONE_SECRET=${DRONE_SECRET}
+      - DRONE_RPC_SECRET=${DRONE_RPC_SECRET}
+  drone-agent:
+    image: drone/agent:latest
+    restart: always
+    depends_on:
+      - drone-server
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - DRONE_SERVER=ws://drone-server:9091/ws/broker
+      - DRONE_SECRET=${DRONE_SECRET}
+    networks:
+      - drone
+
+networks:
+  drone:
