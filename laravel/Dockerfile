@@ -1,0 +1,21 @@
+FROM php:7.2-fpm
+
+# Set working directory
+WORKDIR /var/www/html
+
+# Install Additional dependencies
+RUN apt-get update
+RUN apt-get install -y libmcrypt-dev curl
+
+# Add and Enable PHP-PDO Extenstions
+RUN pecl install mcrypt-1.0.1
+RUN docker-php-ext-install pdo pdo_mysql
+RUN docker-php-ext-enable pdo pdo_mysql mcrypt
+
+RUN chown -R 755 /var/www
+RUN rm -rf /var/cache/apk/*
+
+ADD . /var/www/html
+RUN chown -R www-data:www-data /var/www/html
+
+USER www-data
