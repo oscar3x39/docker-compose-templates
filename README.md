@@ -17,3 +17,9 @@ Laravel is a php web framework.
 - mysql:5.7
 - php7.2-fpm
 ```
+
+Usage:
+```
+cd src
+laravel new
+```
