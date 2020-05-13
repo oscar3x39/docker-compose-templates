@@ -13,7 +13,7 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /Users/oscarlee/data/harbor/log/:/var/log/docker/:z
+      - /var/log/harbor:/var/log/docker/:z
       - type: bind
         source: ./common/config/log/logrotate.conf
         target: /etc/logrotate.d/logrotate.conf
@@ -35,10 +35,10 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /Users/oscarlee/data/harbor/registry:/storage:z
+      - /var/data/harbor/registry:/storage:z
       - ./common/config/registry/:/etc/registry/:z
       - type: bind
-        source: /Users/oscarlee/data/harbor/secret/registry/root.crt
+        source: /var/data/harbor/secret/registry/root.crt
         target: /etc/registry/root.crt
     networks:
       - harbor
@@ -63,7 +63,7 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /Users/oscarlee/data/harbor/registry:/storage:z
+      - /var/data/harbor/registry:/storage:z
       - ./common/config/registry/:/etc/registry/:z
       - type: bind
         source: ./common/config/registryctl/config.yml
@@ -90,7 +90,7 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /Users/oscarlee/data/harbor/database:/var/lib/postgresql/data:z
+      - /var/data/harbor/database:/var/lib/postgresql/data:z
     networks:
       harbor:
     dns_search: .
@@ -115,18 +115,18 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /Users/oscarlee/data/harbor/ca_download/:/etc/core/ca/:z
-      - /Users/oscarlee/data/harbor/psc/:/etc/core/token/:z
-      - /Users/oscarlee/data/harbor/:/data/:z
+      - /var/data/harbor/ca_download/:/etc/core/ca/:z
+      - /var/data/harbor/psc/:/etc/core/token/:z
+      - /var/data/harbor/:/data/:z
       - ./common/config/core/certificates/:/etc/core/certificates/:z
       - type: bind
         source: ./common/config/core/app.conf
         target: /etc/core/app.conf
       - type: bind
-        source: /Users/oscarlee/data/harbor/secret/core/private_key.pem
+        source: /var/data/harbor/secret/core/private_key.pem
         target: /etc/core/private_key.pem
       - type: bind
-        source: /Users/oscarlee/data/harbor/secret/keys/secretkey
+        source: /var/data/harbor/secret/keys/secretkey
         target: /etc/core/key
     networks:
       harbor:
@@ -176,7 +176,7 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /Users/oscarlee/data/harbor/job_logs:/var/log/jobs:z
+      - /var/data/harbor/job_logs:/var/log/jobs:z
       - type: bind
         source: ./common/config/jobservice/config.yml
         target: /etc/jobservice/config.yml
@@ -201,7 +201,7 @@ services:
       - SETGID
       - SETUID
     volumes:
-      - /Users/oscarlee/data/harbor/redis:/var/lib/redis
+      - /var/data/harbor/redis:/var/lib/redis
     networks:
       harbor:
     dns_search: .
