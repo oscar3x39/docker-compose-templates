@@ -1,6 +1,6 @@
 # Examples files
 
-## [Drone](drone)
+### Drone
 Drone is a self-service Continuous Delivery platform for busy development teams.
 
 See https://docs.drone.io/server/provider/github
@@ -10,7 +10,7 @@ See https://docs.drone.io/server/provider/github
 - agent:latest
 ```
 
-## [Laravel](laravel)
+### Laravel
 Laravel is a php web framework.
 ```
 - nginx:stable
@@ -22,4 +22,25 @@ Usage:
 ```
 cd src
 laravel new
+cd ..
+make up
+```
+
+### Harbor
+Harbor is an open source container image registry that secures images with role-based access control.
+
+Usage:
+```
+make up
+make down -v
+```
+
+
+### RocketChat
+The ultimate Free Open Source Solution for team communications.
+
+```
+- rocket.chat:latest
+- mongo:4.0
+- hubot:latest
 ```
