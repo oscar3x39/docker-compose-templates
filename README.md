@@ -1,6 +1,6 @@
 # Examples files
 
-## Drone
+## [Drone](drone)
 Drone is a self-service Continuous Delivery platform for busy development teams.
 
 See https://docs.drone.io/server/provider/github
@@ -10,33 +10,23 @@ See https://docs.drone.io/server/provider/github
 - agent:latest
 ```
 
-## Laravel
-`Laravel is a php web framework.`
+## [Laravel](laravel)
+Laravel is a php web framework.
+
+`.env`
 ```
-- nginx:stable
-- mysql:5.7
-- php7.2-fpm
+DB_CONNECTION=mysql
+DB_HOST=mysql
+DB_PORT=3306
+DB_DATABASE=homestead
+DB_USERNAME=homestead
+DB_PASSWORD=secret
 ```
 
-Usage:
-```
-cd src
-laravel new
-cd ..
-make up
-```
-
-## Harbor
+## [Harbor](harbor)
 Harbor is an open source container image registry that secures images with role-based access control.
 
-Usage:
-```
-make up
-make down -v
-```
-
-
-## RocketChat
+## [RocketChat](rocketchat)
 The ultimate Free Open Source Solution for team communications.
 
 ```
@@ -45,5 +35,5 @@ The ultimate Free Open Source Solution for team communications.
 - hubot:latest
 ```
 
-## Jenkins
+## [Jenkins](jenkins)
 an open source automation server which enables developers around the world to reliably build, test, and deploy their software.
