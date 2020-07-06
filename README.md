@@ -27,9 +27,11 @@ DB_PASSWORD=secret
 Harbor is an open source container image registry that secures images with role-based access control.
 
 ## [RocketChat](rocketchat)
+## [Nginx-RocketChat](nginx-rocketchat)
 The ultimate Free Open Source Solution for team communications.
 
 ```
+- nginx
 - rocket.chat:latest
 - mongo:4.0
 - hubot:latest
