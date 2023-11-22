@@ -1,0 +1,6 @@
+FROM node:18
+
+COPY ./src/node /code
+WORKDIR /code
+
+RUN npm install

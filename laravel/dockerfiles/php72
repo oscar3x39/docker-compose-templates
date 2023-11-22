@@ -15,7 +15,7 @@ RUN docker-php-ext-enable pdo pdo_mysql mcrypt
 RUN chown -R 755 /var/www
 RUN rm -rf /var/cache/apk/*
 
-ADD . /var/www/html
+ADD .. /var/www/html
 RUN chown -R www-data:www-data /var/www/html
 
 USER www-data

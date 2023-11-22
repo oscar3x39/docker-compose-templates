@@ -1,7 +1,7 @@
 version: '3.2'
 
 networks:
-  laravel:
+  subnet:
 
 services:
 
@@ -11,13 +11,13 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./src:/var/www/html
+      - ./src/php:/var/www/html:ro,cached
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
     depends_on:
       - php
       - mysql
     networks:
-      - laravel
+      - subnet
 
   mysql:
     image: mysql:5.7
@@ -38,16 +38,57 @@ services:
       - ./mysql/logs:/var/log/mysql
       - ./mysql/my.cnf:/etc/mysql/conf.d/my.cnf
     networks:
-      - laravel
+      - subnet
 
   php:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: ./dockerfiles/php82
     container_name: php
     volumes:
-      - ./src:/var/www/html
+      - ./src/php:/var/www/html
     ports:
       - "9000:9000"
     networks:
-      - laravel
+      - subnet
+
+  redis:
+    container_name: redis_1on1
+    image: redis:7.2-rc-alpine
+    restart: always
+    #    ports:
+    #      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - ./redis:/data
+    networks:
+      - subnet
+
+#  cron:
+#    build:
+#      context: .
+#      dockerfile: ./dockerfiles/php82
+#    container_name: php_cron
+#    volumes:
+#      - ./src/node:/var/www/html
+#      - ./crontab:/etc/crontabs
+#      - ./logs/:/var/log
+#    entrypoint: [ "crond", "-f"]
+#    depends_on:
+#      - php
+
+#  node:
+#    build:
+#      context: .
+#      dockerfile: ./dockerfiles/node18
+#    container_name: chatroom
+#    working_dir: /code
+#    volumes:
+#      - ./src/node:/code:cached
+#      - ./src/node/node_modules:/code/node_modules:cached
+#    ports:
+#      - "3000:3000"
+#    command: "npm start"
+#    restart: always
+#    networks:
+#      - subnet
