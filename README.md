@@ -39,3 +39,11 @@ The ultimate Free Open Source Solution for team communications.
 
 ## [Jenkins](jenkins)
 an open source automation server which enables developers around the world to reliably build, test, and deploy their software.
+
+## [Grafana](Grafana)
+
+```
+- loki
+- promtail
+- grafana
+```
